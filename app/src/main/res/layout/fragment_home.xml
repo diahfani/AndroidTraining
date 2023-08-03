@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#F6F4EB"
+    tools:context=".ui.home.HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/email"
+                android:background="@drawable/bg_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView1"
+                />
+
+            <EditText
+                android:id="@+id/search_view"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_search"
+                android:drawableStart="@drawable/search_icon"
+                android:drawablePadding="10dp"
+                android:hint="search"
+                android:paddingStart="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView1"
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:backgroundTint="@color/colorPrimary"
+
+                android:outlineAmbientShadowColor="@color/md_grey_600"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/search_view"
+                app:layout_constraintVertical_bias="0.217">
+
+                <TextView
+                    android:id="@+id/titleDiscount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Special 8.8"
+
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/descriptionDiscount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="50dp"
+                    android:text="All item discount up to 50%"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/title_product"
+                android:layout_width="350dp"
+                android:layout_marginTop="16dp"
+
+                android:layout_height="40dp"
+                android:outlineAmbientShadowColor="@color/md_grey_600"
+                android:paddingLeft="10dp"
+                android:shadowRadius="@integer/material_motion_duration_long_1"
+                android:text="Product"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recView1"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_product" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
