@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projecttraining2.Discount
+import com.example.projecttraining2.DiscountAdapter
 import com.example.projecttraining2.Product
 import com.example.projecttraining2.ProductAdapter
 import com.example.projecttraining2.R
@@ -18,8 +20,9 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var rcView: RecyclerView
-    private val list = ArrayList<Product>()
-    private lateinit var pAdapter: ProductAdapter
+    private lateinit var rcViewDiscount: RecyclerView
+    private val listproduct = ArrayList<Product>()
+    private val listDiscount = ArrayList<Discount>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -39,8 +42,12 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
         rcView = root.findViewById(R.id.recView1)
         rcView.setHasFixedSize(true)
-        list.addAll(getListProduct())
-        showRecyclerList()
+        rcViewDiscount = root.findViewById(R.id.rcViewDiscount)
+        rcViewDiscount.setHasFixedSize(true)
+        listproduct.addAll(getListProduct())
+        listDiscount.addAll(getListDiscount())
+        showRecyclerListProduct()
+        showRecyclerListDiscount()
 
 //        val textView: TextView = binding.textHome
 //        homeViewModel.text.observe(viewLifecycleOwner) {
@@ -60,10 +67,16 @@ class HomeFragment : Fragment() {
 //        showRecyclerList()
 //    }
 
-    private fun showRecyclerList() {
+    private fun showRecyclerListProduct() {
         rcView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-        val productAdapter = ProductAdapter(list)
+        val productAdapter = ProductAdapter(listproduct)
         rcView.adapter = productAdapter
+    }
+
+    private fun showRecyclerListDiscount() {
+        rcViewDiscount.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+        val discountadapter = DiscountAdapter(listDiscount)
+        rcViewDiscount.adapter = discountadapter
     }
 
     private fun getListProduct(): ArrayList<Product> {
@@ -75,6 +88,17 @@ class HomeFragment : Fragment() {
             listProduct.add(product)
         }
         return listProduct
+    }
+
+    private fun getListDiscount(): ArrayList<Discount> {
+        val name = resources.getStringArray(R.array.discount_product)
+        val img = resources.getStringArray(R.array.img_discount)
+        val listdiscount = ArrayList<Discount>()
+        for (i in name.indices){
+            val discount = Discount(name[i], img[i])
+            listdiscount.add(discount)
+        }
+        return listdiscount
     }
 
     override fun onDestroyView() {

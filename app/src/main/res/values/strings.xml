@@ -29,11 +29,27 @@
         <item>Meja belajar</item>
     </string-array>
 
+    <string-array name="discount_product">
+        <item>Kursi</item>
+        <item>Bantal</item>
+        <item>Piring</item>
+        <item>Sendok</item>
+        <item>Jam Dinding</item>
+    </string-array>
+
     <string-array name="img_product">
         <item>https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png</item>
         <item>https://images.tokopedia.net/img/JFrBQq/2023/5/11/6ad49027-de4c-48aa-8bab-b15ecf1e1252.jpg</item>
         <item>https://f1-static.s3-ap-southeast-1.amazonaws.com/catalogue/LVN-391817.jpg</item>
         <item>https://partojambe.com/asset/foto_produk/NRA-375453.jpg</item>
         <item>https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitNswssl5QXIjtHzJFvy9DUsZoj5uxEquVjrMufGgPoWl18XMMznC1zCaIeljbplP7ttfUmAkRldSGw3miFth-6S26AuR_C2_HIqOexQRkj70_NLU-c5JtZ0RgmkEdNPxPp60EfS0BiZGNSctYFmBpIqcgjwTJNIk_aPNFY86InvlBGoFw68O6Dlqg6g/s600/image.png</item>
+    </string-array>
+
+    <string-array name="img_discount">
+        <item>https://uwitan.id/wp-content/uploads/2018/06/1.-Furniture-Kursi-Classic-Chair-Natural.jpeg</item>
+        <item>https://res.cloudinary.com/ruparupa-com/f_auto,q_auto/v1574825336/Products/X068547_1.jpg</item>
+        <item>https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/145/0714545_PE730121_S4.jpg</item>
+        <item>https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1047763_PE843511_S4.jpg</item>
+        <item>https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/982/0898247_PE784755_S5.jpg</item>
     </string-array>
 </resources>
