@@ -1,5 +1,6 @@
 package com.example.projecttraining2.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projecttraining2.DetailActivity
 import com.example.projecttraining2.Discount
 import com.example.projecttraining2.DiscountAdapter
 import com.example.projecttraining2.Product
@@ -71,6 +73,13 @@ class HomeFragment : Fragment() {
         rcView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
         val productAdapter = ProductAdapter(listproduct)
         rcView.adapter = productAdapter
+        productAdapter.setOnItemClickCallback(object : ProductAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: Product) {
+                val moveWithObjectIntent = Intent(context, DetailActivity::class.java)
+                moveWithObjectIntent.putExtra(DetailActivity.EXTRA_ITEM, data)
+                startActivity(moveWithObjectIntent)
+            }
+        })
     }
 
     private fun showRecyclerListDiscount() {

@@ -37,4 +37,7 @@ class ProductAdapter(private val listProductAdapter: ArrayList<Product>) : Recyc
             onItemClickCallback.onItemClicked(listProductAdapter[holder.adapterPosition])
         }
     }
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 }

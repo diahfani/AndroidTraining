@@ -20,6 +20,7 @@
     <string name="title_wishlist">Wishlist</string>
     <string name="description_wishlist_page">this is wishlist page</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="addWishlist">Add to wishlist</string>
 
     <string-array name="name_product">
         <item>Tumblr</item>
