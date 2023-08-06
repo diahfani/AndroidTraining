@@ -63,22 +63,22 @@ class HomeActivity : AppCompatActivity() {
 //        navView.setupWithNavController(navController)
     }
 
-    private fun showRecyclerList() {
-        recylerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val productAdapter = ProductAdapter(list)
-        recylerView.adapter = productAdapter
-    }
-
-    private fun getListProduct(): ArrayList<Product> {
-        val name = resources.getStringArray(R.array.name_product)
-        val img = resources.getStringArray(R.array.img_product)
-        val listProduct = ArrayList<Product>()
-        for (i in name.indices){
-            val product = Product(name[i], img[i])
-            listProduct.add(product)
-        }
-        return listProduct
-    }
+//    private fun showRecyclerList() {
+//        recylerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//        val productAdapter = ProductAdapter(list)
+//        recylerView.adapter = productAdapter
+//    }
+//
+//    private fun getListProduct(): ArrayList<Product> {
+//        val name = resources.getStringArray(R.array.name_product)
+//        val img = resources.getStringArray(R.array.img_product)
+//        val listProduct = ArrayList<Product>()
+//        for (i in name.indices){
+//            val product = Product(name[i], img[i])
+//            listProduct.add(product)
+//        }
+//        return listProduct
+//    }
 
     private fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
