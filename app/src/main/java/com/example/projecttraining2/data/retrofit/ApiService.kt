@@ -9,4 +9,7 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("products")
     fun getProducts(): retrofit2.Call<List<FakeStoreAPIResponseItem>>
+
+    @GET("products/{id}")
+    fun getProductsByID(@Path("id") id: String?): retrofit2.Call<FakeStoreAPIResponseItem>
 }

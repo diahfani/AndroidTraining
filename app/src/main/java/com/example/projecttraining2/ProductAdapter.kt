@@ -15,6 +15,13 @@ import com.example.projecttraining2.data.response.FakeStoreAPIResponseItem
 import com.example.projecttraining2.databinding.ProductLayoutBinding
 
 class ProductAdapter(val data: List<FakeStoreAPIResponseItem>?) : RecyclerView.Adapter<ProductAdapter.MyViewHolder>(){
+
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: FakeStoreAPIResponseItem)
+    }
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(get: FakeStoreAPIResponseItem?) {
             val imgPhoto: ImageView = itemView.findViewById(R.id.img_product)
@@ -24,6 +31,10 @@ class ProductAdapter(val data: List<FakeStoreAPIResponseItem>?) : RecyclerView.A
         }
     }
 
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductAdapter.MyViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.product_layout, parent, false)
         return MyViewHolder(v)
@@ -31,6 +42,9 @@ class ProductAdapter(val data: List<FakeStoreAPIResponseItem>?) : RecyclerView.A
 
     override fun onBindViewHolder(holder: ProductAdapter.MyViewHolder, position: Int) {
         holder.bind(data?.get(position))
+        holder.itemView.setOnClickListener{
+            data?.get(position)?.let { it1 -> onItemClickCallback.onItemClicked(it1) }
+        }
     }
 
     override fun getItemCount(): Int = data?.size ?: 0

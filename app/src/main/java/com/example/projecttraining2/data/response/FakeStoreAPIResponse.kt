@@ -8,6 +8,7 @@ data class FakeStoreAPIResponse(
 	val fakeStoreAPIResponse: List<FakeStoreAPIResponseItem?>? = null
 )
 
+
 data class FakeStoreAPIResponseItem(
 
 	@field:SerializedName("image")

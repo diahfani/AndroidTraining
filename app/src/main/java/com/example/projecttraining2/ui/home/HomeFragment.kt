@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.graphics.createBitmap
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -35,8 +37,10 @@ class HomeFragment : Fragment() {
     private lateinit var bindProduct : ProductLayoutBinding
     private lateinit var rcView: RecyclerView
     private lateinit var rcViewDiscount: RecyclerView
+    private var cardProduct: CardView? = null
 //    private val listproduct = ArrayList<Product>()
     private val listDiscount = ArrayList<Discount>()
+    private lateinit var adapter: ProductAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -44,6 +48,7 @@ class HomeFragment : Fragment() {
 
     companion object {
         private const val TAG = "HomeFragment"
+
     }
 
     override fun onCreateView(
@@ -59,20 +64,26 @@ class HomeFragment : Fragment() {
         bindProduct = ProductLayoutBinding.inflate(layoutInflater)
         _binding = FragmentHomeBinding.inflate(layoutInflater)
         rcView = root.findViewById(R.id.recView1)
+//        cardProduct = root.findViewById(R.id.cardViewProduct)
         rcView.setHasFixedSize(true)
         rcViewDiscount = root.findViewById(R.id.rcViewDiscount)
         rcViewDiscount.setHasFixedSize(true)
 //        listproduct.addAll(getListProduct())
-        listDiscount.addAll(getListDiscount())
+//        listDiscount.addAll(getListDiscount())
 //        showRecyclerListProduct()
-        showRecyclerListDiscount()
+//        showRecyclerListDiscount()
 
         // coba retrofit
         rcView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
         val itemDecoration = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
         rcView.addItemDecoration(itemDecoration)
 
-        getProduct()
+        rcViewDiscount.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+//        val itemDecorationDiscount = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
+//        rcViewDiscount.addItemDecoration(itemDecorationDiscount)
+
+
+//        getProduct()
 
 
 
@@ -82,6 +93,16 @@ class HomeFragment : Fragment() {
 //        }
         return root
 
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cardProduct = view.findViewById(R.id.cardViewProduct)
+        cardProduct?.setOnClickListener {
+            Log.e(TAG, "Onclick")
+        }
+        getProduct()
 
     }
 
@@ -100,7 +121,19 @@ class HomeFragment : Fragment() {
                     val responseBody = response.body()
 
                     if (responseBody != null) {
-                        rcView.adapter = ProductAdapter(responseBody)
+                        val productAdapter = ProductAdapter(responseBody)
+                        val discountAdapter = DiscountAdapter(responseBody.take(10))
+                        rcViewDiscount.adapter = discountAdapter
+                        rcView.adapter = productAdapter
+                        productAdapter.setOnItemClickCallback(object : ProductAdapter.OnItemClickCallback{
+                            override fun onItemClicked(data: FakeStoreAPIResponseItem) {
+                                    Log.e(TAG, data.id.toString())
+                                    val moveWithObjectIntent = Intent(context, DetailActivity::class.java)
+                                    moveWithObjectIntent.putExtra(DetailActivity.EXTRA_ITEM, data.id.toString())
+                                    startActivity(moveWithObjectIntent)
+                                }
+                            })
+
                     }
                 } else {
                     Log.e(TAG, "onFailure : $response.message}")
@@ -113,17 +146,6 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun setProductsData(products: List<FakeStoreAPIResponseItem>) {
-        val adapter = ProductAdapter(products)
-//        for (i in products) {
-//            Log.e(TAG, i.title.toString())
-//            bindProduct.nameProduct.text = i?.title
-//            Glide.with(View(context)).load(i?.image).into(bindProduct.imgProduct)
-//        }
-//        adapter.submitList(products)
-        binding.recView1.adapter = adapter
-
-    }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
@@ -147,11 +169,11 @@ class HomeFragment : Fragment() {
 //        })
 //    }
 
-    private fun showRecyclerListDiscount() {
-        rcViewDiscount.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-        val discountadapter = DiscountAdapter(listDiscount)
-        rcViewDiscount.adapter = discountadapter
-    }
+//    private fun showRecyclerListDiscount() {
+//        rcViewDiscount.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+//        val discountadapter = DiscountAdapter(listDiscount)
+//        rcViewDiscount.adapter = discountadapter
+//    }
 
     private fun getListProduct(): ArrayList<Product> {
         val name = resources.getStringArray(R.array.name_product)

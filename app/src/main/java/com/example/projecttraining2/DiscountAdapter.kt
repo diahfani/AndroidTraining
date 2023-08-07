@@ -7,9 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.projecttraining2.data.response.FakeStoreAPIResponseItem
 
 
-class DiscountAdapter(private val listDiscountAdapter:ArrayList<Discount>) : RecyclerView.Adapter<DiscountAdapter.ListViewHolder>() {
+class DiscountAdapter(val listDiscountAdapter:List<FakeStoreAPIResponseItem>?) : RecyclerView.Adapter<DiscountAdapter.ListViewHolder>() {
 
     private lateinit var onItemClickCallback: DiscountAdapter.OnItemClickCallback
 
@@ -18,8 +19,12 @@ class DiscountAdapter(private val listDiscountAdapter:ArrayList<Discount>) : Rec
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val img: ImageView = itemView.findViewById(R.id.img_discount)
-        val nameProductDisc: TextView = itemView.findViewById(R.id.name_discount)
+        fun bind(get: FakeStoreAPIResponseItem?) {
+            val imgDiscount: ImageView = itemView.findViewById(R.id.img_discount)
+            val nameDiscount: TextView = itemView.findViewById(R.id.name_discount)
+            nameDiscount.text = get?.title
+            Glide.with(itemView.context).load(get?.image).into(imgDiscount)
+        }
     }
 
     override fun onCreateViewHolder(
@@ -31,13 +36,8 @@ class DiscountAdapter(private val listDiscountAdapter:ArrayList<Discount>) : Rec
     }
 
     override fun onBindViewHolder(holder: DiscountAdapter.ListViewHolder, position: Int) {
-        val (nameProductDisc, img) = listDiscountAdapter[position]
-        Glide.with(holder.itemView.context).load(img).into(holder.img)
-        holder.nameProductDisc.text = nameProductDisc
-        holder.itemView.setOnClickListener{
-            onItemClickCallback.onItemClicked(listDiscountAdapter[holder.adapterPosition])
-        }
+        holder.bind(listDiscountAdapter?.get(position))
     }
 
-    override fun getItemCount(): Int = listDiscountAdapter.size
+    override fun getItemCount(): Int = listDiscountAdapter?.size ?: 0
 }
