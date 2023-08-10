@@ -1,13 +1,13 @@
-package com.example.projecttraining2.ui.notifications
+package com.example.projecttraining2.ui.wishlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class DashboardViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Profile Fragment"
+        value = "Belum ada wishlist"
     }
     val text: LiveData<String> = _text
 }

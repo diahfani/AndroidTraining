@@ -26,8 +26,10 @@ class ProductAdapter(val data: List<FakeStoreAPIResponseItem>?) : RecyclerView.A
         fun bind(get: FakeStoreAPIResponseItem?) {
             val imgPhoto: ImageView = itemView.findViewById(R.id.img_product)
             val nameProduct: TextView = itemView.findViewById(R.id.name_product)
+            val price: TextView = itemView.findViewById(R.id.price)
             nameProduct.text = get?.title
             Glide.with(itemView.context).load(get?.image).into(imgPhoto)
+            price.text = get?.price.toString()
         }
     }
 

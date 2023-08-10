@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment"
+    tools:context=".ui.profile.ProfileFragment"
     android:background="#F6F4EB">
 
     <ScrollView
@@ -22,8 +22,8 @@
 
                 <ImageView
                     android:id="@+id/halfCircle"
-                    android:layout_width="502dp"
-                    android:layout_height="143dp"
+                    android:layout_width="485dp"
+                    android:layout_height="111dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/profile_background"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -40,14 +40,27 @@
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/halfCircle"
-                    app:layout_constraintVertical_bias="0.606" />
+                    app:layout_constraintVertical_bias="0.506" />
+
+                <TextView
+                    android:id="@+id/usernameSession"
+                    android:layout_width="250dp"
+                    android:layout_height="41dp"
+                    android:gravity="center"
+                    android:text="test"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@id/halfCircle">
+                    app:layout_constraintTop_toBottomOf="@id/usernameSession"
+                    tools:layout_editor_absoluteX="16dp">
 
                     <androidx.appcompat.widget.AppCompatButton
                         style="@android:style/Widget.Button"
@@ -118,7 +131,7 @@
                         android:textAlignment="viewStart" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        style="@android:style/Widget.Button"
+                        android:id="@+id/logout"
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_marginStart="32dp"
@@ -129,27 +142,28 @@
                         android:drawableStart="@drawable/logout"
                         android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
                         android:drawablePadding="20dp"
+                        android:onClick="logout"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:text="Logout"
                         android:textAlignment="viewStart" />
 
-<!--                    <androidx.appcompat.widget.AppCompatButton-->
-<!--                        style="@android:style/Widget.Button"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="70dp"-->
-<!--                        android:layout_marginStart="32dp"-->
-<!--                        android:layout_marginTop="10dp"-->
-<!--                        android:layout_marginEnd="32dp"-->
-<!--                        android:layout_marginBottom="10dp"-->
-<!--                        android:background="@drawable/profile_bg_content"-->
-<!--                        android:drawableStart="@drawable/login"-->
-<!--                        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"-->
-<!--                        android:drawablePadding="20dp"-->
-<!--                        android:paddingStart="10dp"-->
-<!--                        android:paddingEnd="10dp"-->
-<!--                        android:text="Login"-->
-<!--                        android:textAlignment="viewStart" />-->
+                    <!--                    <androidx.appcompat.widget.AppCompatButton-->
+                    <!--                        style="@android:style/Widget.Button"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="70dp"-->
+                    <!--                        android:layout_marginStart="32dp"-->
+                    <!--                        android:layout_marginTop="10dp"-->
+                    <!--                        android:layout_marginEnd="32dp"-->
+                    <!--                        android:layout_marginBottom="10dp"-->
+                    <!--                        android:background="@drawable/profile_bg_content"-->
+                    <!--                        android:drawableStart="@drawable/login"-->
+                    <!--                        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"-->
+                    <!--                        android:drawablePadding="20dp"-->
+                    <!--                        android:paddingStart="10dp"-->
+                    <!--                        android:paddingEnd="10dp"-->
+                    <!--                        android:text="Login"-->
+                    <!--                        android:textAlignment="viewStart" />-->
 
                 </LinearLayout>
 

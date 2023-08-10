@@ -34,13 +34,10 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private lateinit var bindProduct : ProductLayoutBinding
+//    private lateinit var bindProduct : ProductLayoutBinding
     private lateinit var rcView: RecyclerView
     private lateinit var rcViewDiscount: RecyclerView
     private var cardProduct: CardView? = null
-//    private val listproduct = ArrayList<Product>()
-    private val listDiscount = ArrayList<Discount>()
-    private lateinit var adapter: ProductAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -56,22 +53,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        bindProduct = ProductLayoutBinding.inflate(layoutInflater)
-        _binding = FragmentHomeBinding.inflate(layoutInflater)
+//        bindProduct = ProductLayoutBinding.inflate(layoutInflater)
+//        _binding = FragmentHomeBinding.inflate(layoutInflater)
         rcView = root.findViewById(R.id.recView1)
-//        cardProduct = root.findViewById(R.id.cardViewProduct)
         rcView.setHasFixedSize(true)
         rcViewDiscount = root.findViewById(R.id.rcViewDiscount)
         rcViewDiscount.setHasFixedSize(true)
-//        listproduct.addAll(getListProduct())
-//        listDiscount.addAll(getListDiscount())
-//        showRecyclerListProduct()
-//        showRecyclerListDiscount()
 
         // coba retrofit
         rcView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
@@ -79,18 +68,6 @@ class HomeFragment : Fragment() {
         rcView.addItemDecoration(itemDecoration)
 
         rcViewDiscount.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-//        val itemDecorationDiscount = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
-//        rcViewDiscount.addItemDecoration(itemDecorationDiscount)
-
-
-//        getProduct()
-
-
-
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return root
 
 
@@ -127,12 +104,19 @@ class HomeFragment : Fragment() {
                         rcView.adapter = productAdapter
                         productAdapter.setOnItemClickCallback(object : ProductAdapter.OnItemClickCallback{
                             override fun onItemClicked(data: FakeStoreAPIResponseItem) {
-                                    Log.e(TAG, data.id.toString())
                                     val moveWithObjectIntent = Intent(context, DetailActivity::class.java)
                                     moveWithObjectIntent.putExtra(DetailActivity.EXTRA_ITEM, data.id.toString())
                                     startActivity(moveWithObjectIntent)
                                 }
                             })
+                        discountAdapter.setOnItemClickCallback(object : DiscountAdapter.OnItemClickCallback{
+                            override fun onItemClicked(data: FakeStoreAPIResponseItem) {
+                                val moveWithObjectIntent = Intent(context, DetailActivity::class.java)
+                                moveWithObjectIntent.putExtra(DetailActivity.EXTRA_ITEM, data.id.toString())
+                                startActivity(moveWithObjectIntent)
+
+                            }
+                        })
 
                     }
                 } else {

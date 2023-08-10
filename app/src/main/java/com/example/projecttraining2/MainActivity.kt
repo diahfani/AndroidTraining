@@ -1,8 +1,10 @@
 package com.example.projecttraining2
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.inputmethod.InputBinding
 import android.widget.Button
@@ -32,6 +34,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val adapter = OnBoardingViewPagerAdapter(this, this)
         viewPager.adapter = adapter
         dotsIndicator.attachTo(viewPager)
+
+        val userPref = UserPreference(this)
+        val login = userPref.getLogin()
+        val onboardHasShown = userPref.getOnboard()
+
+        if (!onboardHasShown){
+            setContentView(view)
+            userPref.setOnboard()
+        } else if (login.isLogin) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }  else {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
 
     }
 

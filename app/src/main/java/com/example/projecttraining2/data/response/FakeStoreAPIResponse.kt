@@ -1,6 +1,7 @@
 package com.example.projecttraining2.data.response
 
 import com.google.gson.annotations.SerializedName
+import java.util.Objects
 
 data class FakeStoreAPIResponse(
 
@@ -30,7 +31,8 @@ data class FakeStoreAPIResponseItem(
 	val title: String? = null,
 
 	@field:SerializedName("category")
-	val category: String? = null
+	val category: String? = null,
+
 )
 
 data class Rating(

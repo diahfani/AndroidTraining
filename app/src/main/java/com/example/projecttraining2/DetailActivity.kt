@@ -4,14 +4,21 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.projecttraining2.data.response.FakeStoreAPIResponseItem
 import com.example.projecttraining2.data.retrofit.ApiConfig
 import com.example.projecttraining2.databinding.ActivityDetailBinding
 import com.example.projecttraining2.databinding.ActivityHomeBinding
 import com.example.projecttraining2.ui.home.HomeFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,8 +30,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityDetailBinding
-    private  var name: TextView? = null
-    private  var img : ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,25 +38,9 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // GET DATA FROM PREVIOUS ACTIVITY
-
         val id: String? = intent.getStringExtra(EXTRA_ITEM)
 
         getDetailProduct(id)
-        val name: TextView = binding.detailText
-        val img: ImageView = binding.detailImage
-
-//        val item = if (Build.VERSION.SDK_INT >= 33) {
-//            intent.getParcelableExtra<FakeStoreAPIResponseItem>(EXTRA_ITEM, FakeStoreAPIResponseItem::class.java)
-//        } else {
-//            @Suppress("DEPRECATION")
-//            intent.getParcelableExtra<FakeStoreAPIResponseItem>(EXTRA_ITEM)
-//        }
-//
-//        if (item != null) {
-//            name.text = item.title
-//            Glide.with(this).load(item.image).into(img)
-//        }
-
         // button back
         val backImg : ImageView = findViewById(R.id.back)
         backImg.setOnClickListener {
@@ -74,10 +63,28 @@ class DetailActivity : AppCompatActivity() {
                         Log.e("DetailActivity", responseBody.title!!)
                         val name: TextView = binding.detailText
                         val img: ImageView = binding.detailImage
+                        val price: TextView = binding.priceDetail
+                        val desc: TextView = binding.descriptionDiscount
                         name.text = responseBody.title
                         Glide.with(this@DetailActivity).load(responseBody.image).into(img)
-//                        val name: TextView = binding.detailText
-//                        val img: ImageView = binding.detailImage
+                        price.text = "$${responseBody.price.toString()}"
+                        desc.text = responseBody.description.toString()
+
+                        val btnWishlist : Button = binding.btnWishlist
+                        btnWishlist.setOnClickListener {
+                            val newWishlistItem = Wishlist(
+                                title = responseBody.title.toString(),
+                                description = responseBody.description.toString(),
+                                image = responseBody.image.toString(),
+                                price = responseBody.price.toString()
+                            )
+                            lifecycleScope.launch {
+                                withContext(Dispatchers.IO){
+                                    WishlistRoomDb.getDatabase(this@DetailActivity).wishlistDao().insertWishlist(newWishlistItem)
+                                }
+                            }
+                            Toast.makeText(this@DetailActivity, "Berhasil menambahkan Wishlist", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 } else {
                     Log.e("DetailActivity", "onFailure : $response.message}")
