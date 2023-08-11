@@ -17,6 +17,7 @@ import com.example.projecttraining2.App
 import com.example.projecttraining2.DetailActivity
 import com.example.projecttraining2.Wishlist
 import com.example.projecttraining2.WishlistAdapter
+import com.example.projecttraining2.WishlistDetailActivity
 import com.example.projecttraining2.WishlistRoomDb
 import com.example.projecttraining2.databinding.FragmentWishlistBinding
 import kotlinx.coroutines.Dispatchers
@@ -55,8 +56,8 @@ class WishlistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         wishlistAdapter.setOnItemClickCallback(object : WishlistAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Wishlist) {
-                val moveWithObjIntent = Intent(context, DetailActivity::class.java)
-                moveWithObjIntent.putExtra(DetailActivity.EXTRA_ITEM, data)
+                val moveWithObjIntent = Intent(context, WishlistDetailActivity::class.java)
+                moveWithObjIntent.putExtra("Detail Wishlist", data)
                 startActivity(moveWithObjIntent)
             }
         })

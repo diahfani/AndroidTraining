@@ -11,6 +11,9 @@ interface WishlistDao {
     @Query("SELECT * FROM  wishlist ORDER BY id DESC")
     fun getAllWishlist() : List<Wishlist>
 
+    @Query("SELECT * FROM wishlist WHERE id = :id")
+    fun getWishlistByID(id: Int) : Wishlist
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertWishlist(product: Wishlist) : Long
 
